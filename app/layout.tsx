@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Navbar } from "@/components/home/navbar";
+import { Footer } from "@/components/home/footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,10 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} bg-gray-50`}
       >
         <ToastContainer />
-        {children}
+        <div className="max-w-5xl mx-auto">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );
