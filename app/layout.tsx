@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kola Choucoune",
+  title: "Choucoune",
   description:
     "Choucoune Kola Champnana Mix Flavour Soda - 100% Natural Ingredients - No Artificial Sweeteners, Non-GMO & No High Fructose Corn Syrup - Perfect for Kids, Adults & Parties.",
 };
