@@ -103,7 +103,7 @@ export const Hero = () => {
             className="object-contain transition-transform duration-1000 group-hover:scale-[1.05]" // CSS transition slowed to 1s
             priority
           />
-          <div className="md:hidden absolute bottom-0 left-0 w-full h-1/4 bg-gradient-to-t from-gray-50 via-transparent to-transparent"></div>
+          <div className="md:hidden absolute bottom-0 left-0 w-full h-1/4 bg-linear-to-t from-gray-50 via-transparent to-transparent"></div>
         </div>
 
         {/* ================= CONTENT OVERLAY ================= */}
@@ -156,9 +156,11 @@ export const Hero = () => {
           discover flavors crafted to boost your lifestyle.
         </p>
 
-        <button className="cursor-pointer px-8 py-4 bg-amber-500 hover:bg-amber-600 transition text-white rounded-lg font-semibold text-lg shadow-lg">
-          Explore Products
-        </button>
+        <Link href="/#products">
+          <button className="cursor-pointer px-8 py-4 bg-amber-500 hover:bg-amber-600 transition text-white rounded-lg font-semibold text-lg shadow-lg">
+            Explore Products
+          </button>
+        </Link>
       </div>
     </section>
   );

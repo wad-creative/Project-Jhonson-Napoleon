@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 export function Community() {
   const data = [
@@ -24,21 +25,43 @@ export function Community() {
     }, 200);
   };
 
+  // Reusable animation variant
+  const fadeUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" },
+    },
+  };
+
   return (
     <section className="w-full px-6 md:px-12 py-20">
       <div className="max-w-6xl mx-auto space-y-10">
         {/* Title */}
-        <div className="text-center space-y-3">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="text-center space-y-3"
+        >
           <p className="text-gray-500 text-sm md:text-base">
             People around the world are sharing their experience with us.
           </p>
           <h2 className="text-4xl md:text-6xl font-bold tracking-tight">
             Our Active Community
           </h2>
-        </div>
+        </motion.div>
 
         {/* Main Image */}
-        <div className="relative w-full h-[300px] md:h-[500px] rounded-xl overflow-hidden bg-gray-100">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          className="relative w-full h-[300px] md:h-[500px] rounded-xl overflow-hidden bg-gray-100"
+        >
           <Image
             src={active}
             alt="Community highlight"
@@ -48,10 +71,17 @@ export function Community() {
             }`}
             priority
           />
-        </div>
+        </motion.div>
 
         {/* Thumbnails */}
-        <div className="grid grid-cols-5 gap-4">
+        <motion.div
+          variants={fadeUp}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ delay: 0.2 }}
+          className="grid grid-cols-5 gap-4"
+        >
           {data.map(({ imgelink }, index) => (
             <div
               key={index}
@@ -70,7 +100,7 @@ export function Community() {
               />
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

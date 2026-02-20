@@ -10,6 +10,7 @@ import { formSchema, FormType } from "../../lib/schemas/formSchema";
 import { toast } from "react-toastify";
 import Image from "next/image";
 import { Loader2 } from "lucide-react";
+import { motion } from "framer-motion"; // ✅ added
 
 export default function ContactUs() {
   const form = useForm<FormType>({
@@ -36,21 +37,12 @@ export default function ContactUs() {
           html: `
               <div style="font-family: 'Segoe UI', Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; border: 1px solid #e0e0e0; border-radius: 8px; color: #444; line-height: 1.6;">
                 <h2 style="color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; margin-top: 0;">New email from Chouncoune's website</h2>
-                
                 <div style="background-color: #f9f9f9; padding: 15px; border-radius: 5px; margin-bottom: 20px;">
-                  <p style="margin: 5px 0;"><strong>Name:</strong> <span style="color: #333;">${values.firstName} ${values.lastName}</span></p>
-                  <p style="margin: 5px 0;"><strong>Email:</strong> <a href="mailto:${values.email}" style="color: #3498db; text-decoration: none;">${values.email}</a></p>
-                  <p style="margin: 5px 0;"><strong>Subject:</strong> <span style="font-style: italic;">${values.subject}</span></p>
+                  <p style="margin: 5px 0;"><strong>Name:</strong> ${values.firstName} ${values.lastName}</p>
+                  <p style="margin: 5px 0;"><strong>Email:</strong> ${values.email}</p>
+                  <p style="margin: 5px 0;"><strong>Subject:</strong> ${values.subject}</p>
                 </div>
-
-                <p style="font-weight: bold; color: #2c3e50; margin-bottom: 5px;">Message Content:</p>
-                <div style="padding: 15px; border-left: 4px solid #3498db; background-color: #fff; min-height: 100px;">
-                  ${values.message.replace(/\n/g, "<br>")}
-                </div>
-
-                <footer style="margin-top: 30px; font-size: 12px; color: #999; text-align: center; border-top: 1px solid #eee; padding-top: 15px;">
-                  Sent via Chouncoune's Website Contact Form • ${new Date().toLocaleDateString()}
-                </footer>
+                <div>${values.message.replace(/\n/g, "<br>")}</div>
               </div>
           `,
         }),
@@ -58,13 +50,7 @@ export default function ContactUs() {
 
       if (response.ok) {
         toast.success("Message sent successfully!");
-        form.reset({
-          firstName: "",
-          lastName: "",
-          email: "",
-          subject: "",
-          message: "",
-        });
+        form.reset();
       }
 
       if (!response.ok) throw new Error("Failed");
@@ -74,11 +60,16 @@ export default function ContactUs() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50/50 py-50 px-4">
+    <div className="min-h-screen bg-slate-50/50 pt-30 pb-10 px-4">
       <div className="container mx-auto max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 overflow-hidden bg-white rounded-lg shadow shadow-slate-200/60 border border-slate-100">
           {/* Form Side */}
-          <div className="p-4 md:p-8 lg:p-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="p-4 md:p-8 lg:p-12"
+          >
             <div className="max-w-md mx-auto lg:mx-0">
               <h2 className="text-4xl font-extrabold tracking-tight text-slate-900 mb-2">
                 Let's talk.
@@ -201,10 +192,15 @@ export default function ContactUs() {
                 </Button>
               </form>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Image Side - Hidden on small screens */}
-          <div className="hidden lg:block relative bg-slate-100">
+          {/* Image Side */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+            className="hidden lg:block relative bg-slate-100"
+          >
             <Image
               src="/contact.jpg"
               alt="Contact"
@@ -212,7 +208,7 @@ export default function ContactUs() {
               className="object-cover transition-transform duration-700 hover:scale-105"
               priority
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
